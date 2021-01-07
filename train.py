@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-def train(net, n_epochs, train_loader, val_loader, dir_checkpoint = '/content/gdrive/My Drive/fewshot/baseline_checkpoints/', name):
+def train(net, n_epochs, train_loader, val_loader, name, dir_checkpoint = '/content/gdrive/My Drive/fewshot/baseline_checkpoints/'):
 
   total_train = len(train_loader)*train_loader.batch_size
   total_val = len(val_loader)*val_loader.batch_size
