@@ -2,6 +2,7 @@ from torch.utils.data import Dataset
 from sklearn.preprocessing import MinMaxScaler
 import torch
 import pickle
+from torchvision.transforms import Compose, RandomCrop, RandomHorizontalFlip, ColorJitter
 
 
 def unpickle(path):
@@ -18,6 +19,9 @@ class miniImagenet(Dataset):
     self.images = torch.transpose(self.images, 2, 3)
     self.images = torch.transpose(self.images, 2, 1)
     self.labels = [i//600 for i in range(self.__len__())]
+    self.transform = Compose([RandomCrop(70),
+    						  RandomHorizontalFlip(),
+    						  ColorJitter(0.05, 0.05, 0.05, 0.05)])
 
   def __len__(self):
     return self.images.shape[0]
