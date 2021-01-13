@@ -12,8 +12,9 @@ def unpickle(path):
 
 
 class miniImagenet(Dataset):
-  def __init__(self, path):
+  def __init__(self, path, augmentation = True):
     dictionary = unpickle(path)
+    self.augmentation = augmentation
     self.images = dictionary['image_data']
     self.images = (torch.Tensor(self.images)*2)/255 -1    #reescalado entre [-1, 1]
     self.images = torch.transpose(self.images, 2, 3)
@@ -22,6 +23,8 @@ class miniImagenet(Dataset):
     self.transform = Compose([RandomCrop(70),
     						  RandomHorizontalFlip(),
     						  ColorJitter(0.05, 0.05, 0.05, 0.05)])
+    if augmentation:
+    	images = self.transform(images)
 
   def __len__(self):
     return self.images.shape[0]
