@@ -39,4 +39,5 @@ class BaselineBB(nn.Module):
     x = self.maxpool(x)
     x = self.dropout4(x)    
     x = self.fc1(self.flatten(x))
-    return x
+
+    return self.softmax(x)
