@@ -23,12 +23,15 @@ class miniImagenet(Dataset):
     self.transform = Compose([RandomCrop(70),
     						  RandomHorizontalFlip(),
     						  ColorJitter(0.05, 0.05, 0.05, 0.05)])
-    if self.augmentation:
-    	self.images = self.transform(self.images)
+    
 
   def __len__(self):
     return self.images.shape[0]
  
   def __getitem__(self, index):
+  	
+  	if self.augmentation:
+    	return self.labels[index], self.transform(self.images[index])
+
     return self.labels[index], self.images[index]
  
