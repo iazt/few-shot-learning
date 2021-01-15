@@ -1,6 +1,7 @@
 import torch.nn as nn
 import time
 from src.few_shot_episode import train_few_shot, evalDataset
+import sys
 
 def few_shot(net, test_set, n_episodes = 600):
   classes  = [i for i in range(20)]

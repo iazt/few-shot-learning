@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 from torch.nn.utils.weight_norm import WeightNorm
 
 class Linear_classifier(nn.Module):
@@ -31,9 +32,9 @@ class Baseline(nn.Module):
 
 class CosineLayer(nn.Module):
   def __init__(self, in_features, out_features):
-    super(Linear_classifier, self).__init__()
+    super(CosineLayer, self).__init__()
     self.fc = nn.Linear(in_features, out_features, bias = False)
-    WeightNorm.apply(self.classifier, 'weight', dim=0)
+    WeightNorm.apply(self.fc, 'weight', dim=0)
     self.scale_factor = 2
     self.softmax = nn.Softmax(dim=1)
 
@@ -47,13 +48,12 @@ class CosineLayer(nn.Module):
 
 class Baseline_plus(nn.Module):
   def __init__(self, nclasses, backbone):
-    super(Baseline, self).__init__()
+    super(Baseline_plus, self).__init__()
     self.features = backbone()
-    self.classifier = nn.Linear(1600, nclasses)
+    self.classifier = CosineLayer(1600, nclasses)
     self.nclasses = nclasses
 
-    def forward(self,x):
-
-        out  = self.features.forward(x)
-        scores  = self.classifier.forward(out)
-        return scores
+  def forward(self,x):
+    out  = self.features.forward(x)
+    scores  = self.classifier.forward(out)
+    return scores

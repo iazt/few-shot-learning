@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
+import sys
 
 def map_labels(labels):
   """ Convert labels to a range between 0 and 4"""
@@ -51,7 +52,7 @@ def train_few_shot(net, n_epochs, support_loader, query_loader):
     with torch.no_grad():
       labels = data[0].cuda()
       inputs = data[1].float().cuda()
-      feat = net.forward_features(inputs)
+      feat = net.forward_embedding(inputs)
       support_features.append(feat)
       support_labels.append(labels)
 
@@ -59,7 +60,7 @@ def train_few_shot(net, n_epochs, support_loader, query_loader):
     with torch.no_grad():
       labels = data[0].cuda()
       inputs = data[1].float().cuda()
-      feat = net.forward_features(inputs)
+      feat = net.forward_embedding(inputs)
       query_features.append(feat)
       query_labels.append(labels)
 
