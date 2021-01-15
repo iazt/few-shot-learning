@@ -29,10 +29,10 @@ class miniImagenet(Dataset):
                   ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4)])
     l = []
     largo = self.__len__()
-	l.append(self.normalize(self.images[:int(largo/3)]))
-	l.append(self.normalize(self.images[int(largo/3):int(largo*2/3)]))
-	l.append(self.normalize(self.images[int(largo*2/3):]))
-	self.images = torch.cat(l, dim = 0)
+    l.append(self.normalize(self.images[:int(largo/3)]))
+    l.append(self.normalize(self.images[int(largo/3):int(largo*2/3)]))
+    l.append(self.normalize(self.images[int(largo*2/3):]))
+    self.images = torch.cat(l, dim = 0)
 
     if split:
   	  self.images, val_images, self.labels, val_labels = train_test_split(self.images, self.labels, test_size=0.2, random_state=42)

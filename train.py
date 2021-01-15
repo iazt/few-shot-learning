@@ -70,13 +70,13 @@ def train(net, n_epochs, train_loader, val_loader, name, dir_checkpoint = '/cont
     if running_acc/total_val > best_acc:
       best_acc = running_acc/total_val
       torch.save(net.state_dict(), dir_checkpoint + name + '_best_model.pth')
-      with open('/content/gdrive/My Drive/fewshot/baseline_checkpoints/'+ name +'_epoca.txt', 'w') as f:
+      with open(dir_checkpoint+ name +'_epoca.txt', 'w') as f:
         f.write(str(epoch + 1 ))
 
 
   torch.save(net.state_dict(), dir_checkpoint +name+ '_last_model.pth')
   t1 = time.time()
   df = pd.DataFrame({"val_acc":val_acc, "val_loss":val_loss, "train_acc":train_acc, "train_loss":train_loss})
-  df.to_csv('/content/gdrive/My Drive/fewshot/baseline_checkpoints/'+name+'_metrics.csv', index=False)
+  df.to_csv(dir_checkpoint+name+'_metrics.csv', index=False)
   print(t1-t0, 'segundos')
   return val_acc, val_loss, t1-t0
