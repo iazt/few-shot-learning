@@ -3,7 +3,7 @@ import torch.nn as nn
 class Conv4(nn.Module):
 
   def __init__(self):
-    super(BaselineBB, self).__init__()
+    super(Conv4, self).__init__()
 
     self.conv1 = nn.Conv2d(3, 64, 3, padding = 1)
     self.conv2 = nn.Conv2d(64, 64, 3, padding = 1)

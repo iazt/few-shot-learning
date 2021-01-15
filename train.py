@@ -1,9 +1,10 @@
 import sys
-import time
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn 
+import time
+
 def train(net, n_epochs, train_loader, val_loader, name, dir_checkpoint = '/content/gdrive/My Drive/fewshot/baseline_checkpoints/'):
 
   total_train = len(train_loader)*train_loader.batch_size
@@ -16,7 +17,9 @@ def train(net, n_epochs, train_loader, val_loader, name, dir_checkpoint = '/cont
   best_acc = 0
   t0 = time.time()
   criterion = nn.CrossEntropyLoss()
+  criterion = criterion.cuda()
   optimizer = torch.optim.Adam(net.parameters(), lr=1e-3)
+  
   for epoch in range(n_epochs):
     net.train()
     running_loss, running_acc = 0.0, 0.0
@@ -69,7 +72,7 @@ def train(net, n_epochs, train_loader, val_loader, name, dir_checkpoint = '/cont
       torch.save(net.state_dict(), dir_checkpoint + name + '_best_model.pth')
       with open('/content/gdrive/My Drive/fewshot/baseline_checkpoints/'+ name +'_epoca.txt', 'w') as f:
         f.write(str(epoch + 1 ))
-      
+
 
   torch.save(net.state_dict(), dir_checkpoint +name+ '_last_model.pth')
   t1 = time.time()
