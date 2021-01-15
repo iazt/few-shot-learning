@@ -57,3 +57,9 @@ class Baseline_plus(nn.Module):
     out  = self.features.forward(x)
     scores  = self.classifier.forward(out)
     return scores
+
+  def forward_embedding(self,x):
+    return self.features.forward(x)
+
+  def forward_classifier(self,x):
+    return self.classifier.forward(x)

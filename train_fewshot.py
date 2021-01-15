@@ -1,7 +1,10 @@
 import torch.nn as nn
-import time
 from src.few_shot_episode import train_few_shot, evalDataset
 import sys
+import torch
+import numpy as np
+from torch.utils.data import Dataset
+
 
 def few_shot(net, test_set, n_episodes = 600):
   classes  = [i for i in range(20)]
@@ -35,9 +38,7 @@ def few_shot(net, test_set, n_episodes = 600):
     query_dataset = evalDataset(query_set_im, query_set_labels)
     support_loader = DataLoader(support_dataset, batch_size = 4, shuffle=True, num_workers=4, pin_memory=True)
     query_loader = DataLoader(query_dataset, batch_size = 16, shuffle=False, num_workers=4, pin_memory=True)
-    t0 = time.time()
     current_acc, current_loss = train_few_shot(net, n_iter, support_loader, query_loader)
-    print(time.time()-t0)
     acc.append(current_acc)
     loss.append(current_loss)
     info = f'Loss:{current_loss:02.5f}, '

@@ -35,7 +35,7 @@ class miniImagenet(Dataset):
     self.images = torch.cat(l, dim = 0)
 
     if split:
-  	  self.images, val_images, self.labels, val_labels = train_test_split(self.images, self.labels, test_size=0.2, random_state=42)
+      self.images, val_images, self.labels, val_labels = train_test_split(self.images, self.labels, test_size=0.2, random_state=42)
       self.val_dataset = TensorDataset(torch.tensor(val_labels, dtype=torch.long), val_images)
 
     if self.augmentation:
@@ -45,7 +45,7 @@ class miniImagenet(Dataset):
       self.images = torch.cat(l, dim = 0)
 
   def get_val_dataset(self):
-    if self.split:
+	if self.split:
       return self.val_dataset
     return None
 
