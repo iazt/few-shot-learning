@@ -29,9 +29,9 @@ class miniImagenet(Dataset):
     return self.images.shape[0]
  
   def __getitem__(self, index):
-  	
-  	if self.augmentation:
-    	return self.labels[index], self.transform(self.images[index])
+
+    if self.augmentation:
+      return self.labels[index], self.transform(self.images[index])
 
     return self.labels[index], self.images[index]
  
