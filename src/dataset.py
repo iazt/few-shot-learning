@@ -45,7 +45,7 @@ class miniImagenet(Dataset):
       self.images = torch.cat(l, dim = 0)
 
   def get_val_dataset(self):
-	if self.split:
+    if self.split:
       return self.val_dataset
     return None
 
