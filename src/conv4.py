@@ -16,7 +16,7 @@ class Conv4(nn.Module):
     self.maxpool = nn.MaxPool2d(2)
     self.relu = nn.ReLU()
     self.flatten = nn.Flatten()
-    self.fc = nn.Linnear(1600,128)
+    self.fc = nn.Linear(1600,128)
      
   def forward(self, x):
     x = self.relu(self.bn1(self.conv1(x)))

@@ -6,9 +6,12 @@ class Linear_classifier(nn.Module):
   def __init__(self, in_features, out_features):
     super(Linear_classifier, self).__init__()
     self.fc = nn.Linear(in_features, out_features)
-    self.softmax =nn.Softmax(dim=1)
+    self.relu = nn.ReLU()
+    #self.softmax =nn.Softmax(dim=1)
   def forward(self, x):
-    return self.softmax(self.fc(x))
+    #return self.softmax(self.fc(x))
+    
+    return self.fc(self.relu(x))
 
 
 class Baseline(nn.Module):
@@ -36,14 +39,14 @@ class CosineLayer(nn.Module):
     self.fc = nn.Linear(in_features, out_features, bias = False)
     WeightNorm.apply(self.fc, 'weight', dim=0)
     self.scale_factor = 2
-    self.softmax = nn.Softmax(dim=1)
+    #self.softmax = nn.Softmax(dim=1)
 
   def forward(self, x):
     x_norm = torch.norm(x, p=2, dim =1).unsqueeze(1).expand_as(x)
     x_normalized = x.div(x_norm + 1e-4)
     cos_dist = self.fc(x_normalized) 
     scores = self.scale_factor*(cos_dist) 
-    return self.softmax(scores)
+    return scores
 
 
 class Baseline_plus(nn.Module):
