@@ -15,7 +15,7 @@ class Baseline(nn.Module):
     def __init__(self, nclasses, backbone):
       super(Baseline, self).__init__()
       self.features = backbone()
-      self.classifier = Linear_classifier(1600, nclasses)
+      self.classifier = Linear_classifier(128, nclasses)
       self.nclasses = nclasses
 
     def forward(self,x):
@@ -50,7 +50,7 @@ class Baseline_plus(nn.Module):
   def __init__(self, nclasses, backbone):
     super(Baseline_plus, self).__init__()
     self.features = backbone()
-    self.classifier = CosineLayer(1600, nclasses)
+    self.classifier = CosineLayer(128, nclasses)
     self.nclasses = nclasses
 
   def forward(self,x):

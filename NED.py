@@ -14,8 +14,8 @@ class ned():
 		distances = euclidean_distance(self.embedding_support, input_embedding)
 		ordered_idxs = torch.sort(distances, dim = 0)
 		ordered_embedding = self.embedding_support[ordered_idxs.indices]
-		ordered_labels = self.labels[ordered_idxs.indices]
-		return ordered_embedding[:k], ordered_labels[:k]
+		ordered_labels = self.labels_support[ordered_idxs.indices]
+		return ordered_embedding[:self.k-1], ordered_labels[:self.k-1]
 
 	def calculate_probabilities(self, input_embedding):
 		k_nearest_embedding, k_nearest_labels = self.k_nearest(input_embedding)
