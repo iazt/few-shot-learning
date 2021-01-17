@@ -3,7 +3,7 @@ import torch.nn as nn
 class Conv6(nn.Module):
 
   def __init__(self):
-    super(Conv4, self).__init__()
+    super(Conv6, self).__init__()
 
     self.conv1 = nn.Conv2d(3, 64, 3, padding = 1)
     self.conv2 = nn.Conv2d(64, 64, 3, padding = 1)
@@ -26,7 +26,7 @@ class Conv6(nn.Module):
     self.maxpool = nn.MaxPool2d(2)
     self.relu = nn.ReLU()
     self.flatten = nn.Flatten()
-    self.fc = nn.Linear(1600,128)
+    self.fc = nn.Linear(64,128)
      
   def forward(self, x):
     x = self.relu(self.bn1(self.conv1(x)))
