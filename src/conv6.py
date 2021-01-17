@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-class Conv4(nn.Module):
+class Conv6(nn.Module):
 
   def __init__(self):
     super(Conv4, self).__init__()
@@ -9,14 +9,20 @@ class Conv4(nn.Module):
     self.conv2 = nn.Conv2d(64, 64, 3, padding = 1)
     self.conv3 = nn.Conv2d(64, 64, 3, padding = 1)
     self.conv4 = nn.Conv2d(64, 64, 3, padding = 1)
+    self.conv5 = nn.Conv2d(64, 64, 3, padding = 1)
+    self.conv6 = nn.Conv2d(64, 64, 3, padding = 1)
     self.bn1 =  nn.BatchNorm2d(64)
     self.bn2 = nn.BatchNorm2d(64)
     self.bn3 = nn.BatchNorm2d(64)
     self.bn4 = nn.BatchNorm2d(64)
+    self.bn5 = nn.BatchNorm2d(64)
+    self.bn6 = nn.BatchNorm2d(64)
     self.dropout1 = nn.Dropout()
     self.dropout2 = nn.Dropout()
     self.dropout3 = nn.Dropout()
     self.dropout4 = nn.Dropout()
+    self.dropout5 = nn.Dropout()
+    self.dropout6 = nn.Dropout()
     self.maxpool = nn.MaxPool2d(2)
     self.relu = nn.ReLU()
     self.flatten = nn.Flatten()
@@ -35,5 +41,13 @@ class Conv4(nn.Module):
     x = self.relu(self.bn4(self.conv4(x)))
     x = self.maxpool(x)
     x = self.dropout4(x)
+
+    x = self.relu(self.bn5(self.conv5(x)))
+    x = self.maxpool(x)
+    x = self.dropout5(x)
+
+    x = self.relu(self.bn6(self.conv6(x)))
+    x = self.maxpool(x)
+    x = self.dropout6(x)
    
     return self.fc(self.flatten(x))
