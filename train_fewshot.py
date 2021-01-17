@@ -3,7 +3,7 @@ from src.few_shot_episode import train_few_shot, evalDataset
 import sys
 import torch
 import numpy as np
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 
 
 def few_shot(net, test_set, n_episodes = 600):
